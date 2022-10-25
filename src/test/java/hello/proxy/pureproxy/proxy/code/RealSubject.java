@@ -13,8 +13,8 @@ public class RealSubject implements Subject {
 
     private void sleep(int millis) {
         try {
-            sleep(1000);
-        } catch (IllegalStateException e) {
+            Thread.sleep(millis);
+        } catch (IllegalStateException | InterruptedException e) {
             e.printStackTrace();
         }
 
