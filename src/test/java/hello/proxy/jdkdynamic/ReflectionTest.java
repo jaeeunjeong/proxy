@@ -1,4 +1,4 @@
-package hello.proxy.pureproxy.jdkdynamic;
+package hello.proxy.jdkdynamic;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
@@ -9,6 +9,9 @@ import java.lang.reflect.Method;
 @Slf4j
 public class ReflectionTest {
 
+    /*
+     * 리플렉션을 사용하는 이유 : 호출하는 메서드가 다른 공통된 로직이 존재한다.
+     * */
     @DisplayName("리플렉션 추가 전")
     @Test
     void test1() {
@@ -23,6 +26,10 @@ public class ReflectionTest {
         log.info("result={}", result2);
     }
 
+    /*
+    * 코드가 갖고 있는 공통적인 성질,
+    * 클래스나 메서드의 메타 정보를 사용해서 동적으로 호출하는 메서드를 변경한다.
+    */
     @DisplayName("리플렉션 추가 1")
     @Test
     void test2() throws Exception {
@@ -51,9 +58,12 @@ public class ReflectionTest {
         dynamicCall(methodCallB, target);
     }
 
+    /**
+     * 공톡로직 1, 공통로직 2를 한번에 처리할 수 있는 통합된 공통 처리 로직이다.
+     */
     private void dynamicCall(Method method, Object target) throws Exception {
         log.info("start");
-        Object result = method.invoke(target);
+        Object result = method.invoke(target); // 호출할 메서드 정보를 넘겨서 메서드를 사용한다.
         log.info("result = {}", result);
     }
 
